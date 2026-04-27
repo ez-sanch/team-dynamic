@@ -43,9 +43,23 @@ export function OurStory() {
           <h2 className="font-display text-display-lg text-ink font-light">Here is our story.</h2>
         </motion.div>
 
-        {/* Individual profiles */}
+        {/* Boat photo */}
         <motion.div
           ref={profilesRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={profilesVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-sm mx-auto aspect-[3/4] rounded-sm overflow-hidden border border-white/5"
+        >
+          <img
+            src="/assets/boat/IMG_7482.PNG"
+            alt="Aidan and Charlie aboard La Push"
+            className="w-full h-full object-cover object-[center_30%]"
+          />
+        </motion.div>
+
+        {/* Individual profiles */}
+        <motion.div
           initial="hidden"
           animate={profilesVisible ? 'visible' : 'hidden'}
           variants={staggerContainer}

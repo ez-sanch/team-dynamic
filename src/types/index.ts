@@ -4,6 +4,8 @@ export interface CrewMember {
   role: string
   bio: string
   imageSrc?: string
+  imagePosition?: string
+  imageFit?: 'cover' | 'contain'
   socialUrl?: string
 }
 

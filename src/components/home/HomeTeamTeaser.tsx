@@ -24,7 +24,7 @@ export function HomeTeamTeaser() {
             className="aspect-[4/3] rounded-sm overflow-hidden border border-white/5"
           >
             <img
-              src="/assets/IMG_7482.PNG"
+              src="/assets/boat/IMG_7482.PNG"
               alt="Aidan and Charlie aboard La Push"
               className="w-full h-full object-cover object-[center_30%] hover:scale-105 transition-transform duration-700"
             />
