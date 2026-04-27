@@ -9,4 +9,11 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  appType: 'spa',
+  preview: {
+    port: 4173,
+  },
+  server: {
+    port: 5173,
+  },
 })
