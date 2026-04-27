@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Black + light blue dark theme */
+    --background: oklch(0.09 0.002 240);
+    --foreground: oklch(0.96 0.002 240);
+
+    --card: oklch(0.13 0.003 240);
+    --card-foreground: oklch(0.96 0.002 240);
+
+    --popover: oklch(0.13 0.003 240);
+    --popover-foreground: oklch(0.96 0.002 240);
+
+    /* Light blue primary: #38bdf8 → oklch(0.72 0.15 210) */
+    --primary: oklch(0.72 0.15 210);
+    --primary-foreground: oklch(0.09 0.002 240);
+
+    --secondary: oklch(0.18 0.003 240);
+    --secondary-foreground: oklch(0.96 0.002 240);
+
+    --muted: oklch(0.18 0.003 240);
+    --muted-foreground: oklch(0.55 0.005 240);
+
+    --accent: oklch(0.18 0.003 240);
+    --accent-foreground: oklch(0.96 0.002 240);
+
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: oklch(0.985 0 0);
+
+    --border: oklch(0.22 0.005 240);
+    --input: oklch(0.22 0.005 240);
+    --ring: oklch(0.72 0.15 210);
+
+    --radius: 0.25rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  ::selection {
+    background-color: rgba(56, 189, 248, 0.25);
+    color: #f4f4f5;
+  }
+}
