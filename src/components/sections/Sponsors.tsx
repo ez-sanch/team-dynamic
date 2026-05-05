@@ -114,7 +114,7 @@ export function Sponsors({ currentSponsors, tiers }: SponsorsProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={headerVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center justify-between border border-white/5 rounded-sm px-6 py-5 bg-canvas hover:border-blue/20 transition-colors duration-300"
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border border-white/5 rounded-sm px-6 py-5 bg-canvas hover:border-blue/20 transition-colors duration-300"
         >
           <div className="flex items-center gap-6">
             <img

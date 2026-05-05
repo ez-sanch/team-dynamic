@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { Menu, X, Anchor } from 'lucide-react'
+import { Menu, Anchor } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
@@ -87,14 +87,6 @@ export function Nav() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="bg-canvas border-l border-white/5 w-[240px] pt-16">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4 text-ink-faint hover:text-blue hover:bg-white/5"
-              onClick={() => setMobileOpen(false)}
-            >
-              <X size={18} />
-            </Button>
             <AnimatePresence>
               {mobileOpen && (
                 <motion.ul
