@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -9,80 +11,80 @@ interface SponsorsProps {
   tiers: SponsorTier[]
 }
 
-function SponsorLogoCard({ sponsor }: { sponsor: SponsorLogo }) {
-  const inner = sponsor.logoSrc ? (
-    /* IMAGE: replace once logo is provided */
-    <img
-      src={sponsor.logoSrc}
-      alt={sponsor.name}
-      className="max-h-10 max-w-[120px] object-contain opacity-40 hover:opacity-80 transition-opacity duration-300"
-    />
-  ) : (
-    /* LOGO: replace with <img> once sponsor provides logo asset */
-    <span className="font-body text-xs text-blue/20 uppercase tracking-widest text-center px-2">
-      {sponsor.name}
-    </span>
-  )
-
-  const content = (
-    <div className="aspect-video bg-surface border border-white/5 hover:border-blue/15 rounded-sm flex items-center justify-center transition-all duration-300 hover:shadow-blue-glow">
-      {inner}
-    </div>
-  )
-
-  return sponsor.url ? (
-    <a href={sponsor.url} target="_blank" rel="noopener noreferrer" aria-label={sponsor.name}>
-      {content}
-    </a>
-  ) : (
-    <div>{content}</div>
-  )
-}
-
-function TierCard({ tier }: { tier: SponsorTier }) {
-  const subject = tier.contactSubject ?? `Sponsorship Enquiry — ${tier.name}`
-  const mailHref = `mailto:hello@teamdynamic.com?subject=${encodeURIComponent(subject)}`
-  /* CONTACT: replace hello@teamdynamic.com with real contact email */
+function LargeTierCard({ tier }: { tier: SponsorTier }) {
+  const mailHref = `mailto:hello@teamdynamic.com?subject=${encodeURIComponent(tier.contactSubject ?? tier.name)}`
 
   return (
-    <motion.div variants={staggerItem}>
-      <Card
-        className={`flex flex-col h-full transition-all duration-500 ${
-          tier.featured
-            ? 'bg-surface border-blue/30 shadow-blue-glow hover:shadow-blue-glow-lg hover:border-blue/50'
-            : 'bg-surface border-white/5 hover:border-blue/15 hover:shadow-card-dark'
-        }`}
-      >
-        <CardHeader className="pb-2 space-y-1">
+    <motion.div variants={staggerItem} className="h-full">
+      <Card className={`flex flex-col h-full transition-all duration-500 ${
+        tier.featured
+          ? 'bg-surface border-blue/30 shadow-blue-glow hover:shadow-blue-glow-lg hover:border-blue/50'
+          : 'bg-surface border-white/5 hover:border-blue/15'
+      }`}>
+        <CardHeader className="pb-2 space-y-2">
           {tier.featured && (
-            <p className="font-body text-[9px] tracking-[0.35em] uppercase text-blue/60 mb-1">
-              Most popular
-            </p>
+            <p className="font-body text-[9px] tracking-[0.35em] uppercase text-blue/60">Primary tier</p>
           )}
-          <h3 className={`font-display text-2xl font-light ${tier.featured ? 'text-blue' : 'text-ink'}`}>
-            {tier.name}
-          </h3>
-          <p className="font-body text-sm text-ink-muted">{tier.tagline}</p>
+          <div className="flex items-start justify-between gap-4 flex-wrap">
+            <h3 className={`font-display text-2xl font-light ${tier.featured ? 'text-blue' : 'text-ink'}`}>
+              {tier.name}
+            </h3>
+            <span className="font-body text-xs text-ink-muted bg-white/5 px-3 py-1 rounded-sm shrink-0">
+              {tier.priceRange}
+            </span>
+          </div>
         </CardHeader>
 
         <CardContent className="flex-1 flex flex-col justify-between gap-6 pt-4">
           <ul className="space-y-2.5">
-            {tier.benefits.map((benefit, i) => (
+            {tier.benefits.map((b, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-ink-muted font-body">
                 <span className={`mt-0.5 shrink-0 ${tier.featured ? 'text-blue/60' : 'text-ink-faint'}`}>—</span>
-                {benefit}
+                {b}
               </li>
             ))}
           </ul>
 
           <a href={mailHref}>
-            <Button
-              className={`w-full font-body tracking-widest text-xs uppercase py-5 transition-all duration-300 ${
-                tier.featured
-                  ? 'bg-blue text-canvas hover:bg-blue-bright shadow-blue-glow hover:shadow-blue-glow-lg'
-                  : 'bg-transparent border border-white/10 text-ink-muted hover:border-blue/30 hover:text-blue hover:bg-blue/5'
-              }`}
-            >
+            <Button className={`w-full font-body tracking-widest text-xs uppercase py-5 transition-all duration-300 ${
+              tier.featured
+                ? 'bg-blue text-canvas hover:bg-blue-bright shadow-blue-glow'
+                : 'bg-transparent border border-white/10 text-ink-muted hover:border-blue/30 hover:text-blue hover:bg-blue/5'
+            }`}>
+              Enquire
+            </Button>
+          </a>
+        </CardContent>
+      </Card>
+    </motion.div>
+  )
+}
+
+function SmallTierCard({ tier }: { tier: SponsorTier }) {
+  const mailHref = `mailto:hello@teamdynamic.com?subject=${encodeURIComponent(tier.contactSubject ?? tier.name)}`
+
+  return (
+    <motion.div variants={staggerItem}>
+      <Card className="bg-surface border-white/5 hover:border-blue/15 transition-all duration-500 flex flex-col h-full">
+        <CardContent className="p-6 flex flex-col h-full gap-4">
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <h3 className="font-display text-xl text-ink font-light">{tier.name}</h3>
+            <span className="font-body text-[10px] text-ink-faint bg-white/5 px-2 py-0.5 rounded-sm shrink-0">
+              {tier.priceRange}
+            </span>
+          </div>
+
+          <ul className="space-y-1.5 flex-1">
+            {tier.benefits.map((b, i) => (
+              <li key={i} className="flex items-start gap-2 text-xs text-ink-faint font-body">
+                <span className="text-ink-faint/40 mt-0.5 shrink-0">—</span>
+                {b}
+              </li>
+            ))}
+          </ul>
+
+          <a href={mailHref}>
+            <Button className="w-full bg-transparent border border-white/10 text-ink-muted hover:border-blue/30 hover:text-blue hover:bg-blue/5 font-body tracking-widest text-xs uppercase py-4 transition-all duration-300">
               Enquire
             </Button>
           </a>
@@ -94,65 +96,101 @@ function TierCard({ tier }: { tier: SponsorTier }) {
 
 export function Sponsors({ currentSponsors, tiers }: SponsorsProps) {
   const { ref: headerRef, isInView: headerVisible } = useScrollReveal()
-  const { ref: tiersRef, isInView: tiersVisible } = useScrollReveal()
+  const { ref: largeTiersRef, isInView: largeTiersVisible } = useScrollReveal()
+  const { ref: smallTiersRef, isInView: smallTiersVisible } = useScrollReveal()
+
+  const largeTiers = tiers.filter(t => t.size === 'large')
+  const smallTiers = tiers.filter(t => t.size === 'small')
 
   return (
     <section id="sponsors" className="py-section px-6 bg-surface relative">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue/10 to-transparent" />
 
       <div className="max-w-7xl mx-auto space-y-20">
-        {/* Current sponsors */}
+
+        {/* Founding sponsor link */}
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={headerVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="flex items-center justify-between border border-white/5 rounded-sm px-6 py-5 bg-canvas hover:border-blue/20 transition-colors duration-300"
+        >
+          <div className="flex items-center gap-6">
+            <img
+              src="/assets/partners/tellus-logo.webp"
+              alt="Tellus Outdoor"
+              className="h-6 object-contain opacity-70"
+            />
+            <div className="w-px h-6 bg-white/10" />
+            <p className="font-body text-[10px] tracking-[0.4em] uppercase text-ink-faint">Founding Sponsor</p>
+          </div>
+          <Link
+            to="/partners"
+            className="inline-flex items-center gap-2 font-body text-sm text-blue hover:text-blue-bright transition-colors duration-200 group"
+          >
+            View partners
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+          </Link>
+        </motion.div>
+
+        {/* Header */}
+        <div className="max-w-xl">
+          <p className="font-body text-[10px] tracking-[0.4em] uppercase text-blue/60 mb-3">Partner with Us</p>
+          <div className="w-8 h-px bg-blue/30 mb-6" />
+          <h2 className="font-display text-display-lg text-ink font-light">
+            Become Part<br />of the Voyage
+          </h2>
+          <p className="font-body text-ink-muted mt-4 leading-relaxed text-sm">
+            Align your brand with one of the most extraordinary human endurance achievements of 2028. Sponsoring Team Dynamic puts your name alongside a story that will be told long after the finish line.
+          </p>
+        </div>
+
+        {/* Large tiers — Ocean Steward + Blue Horizon */}
+        <motion.div
+          ref={largeTiersRef}
+          initial="hidden"
+          animate={largeTiersVisible ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {largeTiers.map(tier => (
+            <LargeTierCard key={tier.id} tier={tier} />
+          ))}
+        </motion.div>
+
+        {/* Small tiers — Tidal Impact, Current Crew, Voyage Supporters */}
+        <motion.div
+          ref={smallTiersRef}
+          initial="hidden"
+          animate={smallTiersVisible ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+        >
+          {smallTiers.map(tier => (
+            <SmallTierCard key={tier.id} tier={tier} />
+          ))}
+        </motion.div>
+
+        {/* Current sponsors grid — shown when populated */}
         {currentSponsors.length > 0 && (
           <div className="space-y-10">
             <div>
-              <p className="font-body text-[10px] tracking-[0.4em] uppercase text-blue/60 mb-3">
-                Our Sponsors
-              </p>
+              <p className="font-body text-[10px] tracking-[0.4em] uppercase text-blue/60 mb-3">Current Sponsors</p>
               <div className="w-8 h-px bg-blue/30" />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {currentSponsors.map((s) => (
-                <SponsorLogoCard key={s.id} sponsor={s} />
+                <div key={s.id} className="aspect-video bg-canvas border border-dashed border-blue/15 rounded-sm flex items-center justify-center">
+                  {s.logoSrc
+                    ? <img src={s.logoSrc} alt={s.name} className="max-h-10 max-w-[120px] object-contain opacity-60" />
+                    : <span className="font-body text-xs text-blue/20 uppercase tracking-widest">{s.name}</span>
+                  }
+                </div>
               ))}
             </div>
           </div>
         )}
-
-        {/* Sponsorship tiers */}
-        <div className="space-y-12">
-          <motion.div
-            ref={headerRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={headerVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-xl"
-          >
-            <p className="font-body text-[10px] tracking-[0.4em] uppercase text-blue/60 mb-3">
-              Partner with Us
-            </p>
-            <div className="w-8 h-px bg-blue/30 mb-6" />
-            <h2 className="font-display text-display-lg text-ink font-light">
-              {/* COPY: replace with finalized sponsorship headline */}
-              Become Part<br />of the Voyage
-            </h2>
-            <p className="font-body text-ink-muted mt-4 leading-relaxed text-sm">
-              {/* COPY: replace with finalized sponsorship pitch */}
-              Align your brand with one of the most extraordinary human endurance achievements of 2028. Sponsoring Team Dynamic puts your name alongside a story that will be told long after the finish line.
-            </p>
-          </motion.div>
-
-          <motion.div
-            ref={tiersRef}
-            initial="hidden"
-            animate={tiersVisible ? 'visible' : 'hidden'}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
-            {tiers.map((tier) => (
-              <TierCard key={tier.id} tier={tier} />
-            ))}
-          </motion.div>
-        </div>
       </div>
     </section>
   )

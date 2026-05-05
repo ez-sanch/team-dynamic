@@ -1,4 +1,4 @@
-import { Globe, AtSign, Mail } from 'lucide-react'
+import { Globe, Mail } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
@@ -13,9 +13,8 @@ const NAV_LINKS = [
 ]
 
 const SOCIAL_LINKS = [
-  { icon: Globe,   label: 'Instagram',  href: '#' /* SOCIAL: replace with real Instagram URL */ },
-  { icon: AtSign,  label: 'Twitter / X', href: '#' /* SOCIAL: replace with real Twitter/X URL */ },
-  { icon: Mail,    label: 'Email',       href: 'mailto:hello@teamdynamic.com' /* CONTACT: replace email */ },
+  { icon: Globe, label: 'Instagram', href: 'https://www.instagram.com/team_dynamic2028/' },
+  { icon: Mail,  label: 'Email',     href: 'mailto:hello@teamdynamic.com' /* CONTACT: replace with real email */ },
 ]
 
 export function Footer() {
@@ -68,6 +67,8 @@ export function Footer() {
                 key={label}
                 href={href}
                 aria-label={label}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-ink-muted hover:text-blue transition-colors duration-200"
               >
                 <Icon size={17} strokeWidth={1.5} />

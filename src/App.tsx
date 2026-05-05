@@ -5,6 +5,7 @@ import { Race } from '@/pages/Race'
 import { Team } from '@/pages/Team'
 import { MissionPage } from '@/pages/MissionPage'
 import { SponsorsPage } from '@/pages/SponsorsPage'
+import { PartnersPage } from '@/pages/PartnersPage'
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route path="/race"     element={<Race />} />
         <Route path="/team"     element={<Team />} />
         <Route path="/mission"  element={<MissionPage />} />
-        <Route path="/sponsors" element={<SponsorsPage />} />
+        <Route path="/sponsors"  element={<SponsorsPage />} />
+        <Route path="/partners"  element={<PartnersPage />} />
       </Route>
     </Routes>
   )

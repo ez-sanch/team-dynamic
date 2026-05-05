@@ -7,8 +7,8 @@ import { useScrollReveal, staggerContainer, staggerItem } from '@/hooks/useScrol
 const STATS = [
   { value: '3,000', unit: 'miles', label: 'Atlantic crossing' },
   { value: '~40',   unit: 'days',  label: 'Race duration' },
-  { value: '0',     unit: 'support', label: 'Unsupported' },
-  { value: 'Jan',   unit: '2028',  label: 'Race start' },
+  { value: '100%', unit: 'self-funded', label: 'Unsupported' },
+  { value: 'Dec',   unit: '2028',  label: 'Race start' },
 ]
 
 export function HomeRaceTeaser() {

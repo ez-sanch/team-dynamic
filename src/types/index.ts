@@ -19,8 +19,11 @@ export interface SponsorLogo {
 export interface SponsorTier {
   id: string
   name: string
+  priceRange: string
   tagline: string
   benefits: string[]
+  examples?: string[]
   featured?: boolean
+  size?: 'large' | 'small'
   contactSubject?: string
 }
